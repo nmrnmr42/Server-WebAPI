@@ -25,6 +25,7 @@ const dbPromise = open({
 
     await db.exec(`CREATE TABLE IF NOT EXISTS list (
         id INTEGER NOT NULL,
+        userId CHAR(10) NOT NULL,
         date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
 })();
@@ -65,8 +66,9 @@ app.delete('/list', async (req, res) => {
     const db = await dbPromise;
     try {
         db.run(
-            "delete from list where id = ? and date = ?",
+            "delete from list where id = ? and userId = ? and date = ?",
             req.body.id,
+            req.body.userId,
             req.body.date
         );
         res.status(200).send(successMessage);
