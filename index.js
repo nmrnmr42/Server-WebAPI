@@ -6,6 +6,13 @@ const app = express();
 
 // リクエストボディのパース
 app.use(express.json());
+app.use(cors());
+// 別のlocalhostからアクセスできるようにする
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    next();
+});
 
 const dbPromise = open({
     filename: './test.db',
