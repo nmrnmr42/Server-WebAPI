@@ -1,6 +1,7 @@
 const express = require('express');
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
+const cors = require("cors");
 const port = 3000;
 const app = express();
 
